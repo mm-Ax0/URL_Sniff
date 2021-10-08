@@ -5,11 +5,11 @@ import sys
 import argparse #customize your args
 import subprocess
 import os
+import time
 
 def helpme():
 	print ("Syntax: -u <url> -f <wordlist.txt> -m <Preferred mode>\n")
 	print ("Usage: This Program acts as a fuzzer allowing you to enumerate unseen pages from targets. The program takes the given url and tests the entered url against file paths or extensions.")
-	print ("Available Modes:\n")
 def main():
 	
 	parser = argparse.ArgumentParser(description='Url Fuzzing tool')
@@ -34,6 +34,7 @@ def urlsniff(url,wordlist,stylemode):#this function works with the url
 	scopecodes=[301,302,307,200,204]
 	print("-Checking Original Url-")
 	try:
+		start_time = time.time()
 		checks = urllib.request.urlopen(url).getcode() #checks initial url.
 		print("[+]Active[+] ->",url,":",checks)
 		#fileDir = os.path.dirname(os.path.realpath('__file__')) #print current DIR of file.
@@ -75,7 +76,11 @@ def urlsniff(url,wordlist,stylemode):#this function works with the url
 					print("[-]This code is not in scopecodes[-]")
 			except Exception as code:
 				outofscope.append(code)
+	total_time=time.time() - start_time
+	print ("URL Sniff took",round(total_time), "seconds to run.")
+
 		
 		
 subprocess.run('python3 Banner.py', shell=True) #'banner grab'
 main()
+
