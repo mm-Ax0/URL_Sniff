@@ -1,4 +1,4 @@
-This tool does work on Windows,Linux, & Mac.
+This tool is compatible with Windows,Linux, & Mac.
 
 If using list all wordlists, you may have to change source code to exclude the '/' (line 45 & 63 in orig)
 
